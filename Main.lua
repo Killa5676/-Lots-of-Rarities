@@ -76,6 +76,8 @@ local Window = Rayfield:CreateWindow({
         print("Auto tap is", bool)
         if bool then 
             autoTeleport() 
+        else
+            getgenv().autoteleport = false
         end
     end
  })
