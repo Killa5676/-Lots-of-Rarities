@@ -2,7 +2,7 @@ getgenv().autoteleport = false
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-function teleporto(placeCframe) --2nd
+function teleporto(placeCframe)
     local plyr = game.Players.LocalPlayer
     if plyr.Character then
         plyr.Character.HumanoidRootPart.CFrame = placeCframe
@@ -12,27 +12,31 @@ end
 local function autoTeleport()
     spawn(function()
         while getgenv().autoteleport == true do
-            teleporto(workspace.Buttons.Roll.Rarities.CFrame)
-            wait(5) -- wait for the player to finish teleporting before moving on
+            for i = 1, 15 do 
+                teleporto(workspace.Buttons.Roll.Rarities.CFrame)
+                wait(5) -- wait for the player to finish teleporting before moving on
 
-            teleporto(CFrame.new(53.5582275390625, 3.6850311756134033, 34.35844802856445))
-            wait(1)
+                teleporto(CFrame.new(53.5582275390625, 3.6850311756134033, 34.35844802856445))
+                wait(1)
 
-            teleporto(CFrame.new(54.4811897277832, 3.6850311756134033, 45.05955505371094))
-            wait(1)
+                teleporto(CFrame.new(54.4811897277832, 3.6850311756134033, 45.05955505371094))
+                wait(1)
 
-            teleporto(CFrame.new(53.402488708496094, 3.6850311756134033, 53.95044708251953))
-            wait(1)
+                teleporto(CFrame.new(53.402488708496094, 3.6850311756134033, 53.95044708251953))
+                wait(1)
 
-            teleporto(CFrame.new(53.50069046020508, 3.6850311756134033, 65.40721893310547))
-            wait(1)
+                teleporto(CFrame.new(53.50069046020508, 3.6850311756134033, 65.40721893310547))
+                wait(1)
 
-            teleporto(CFrame.new(53.66569900512695, 3.6850311756134033, 74.15584564208984))
+                teleporto(CFrame.new(53.66569900512695, 3.6850311756134033, 74.15584564208984))
+                wait(1)
+            end
+
+            teleporto(CFrame.new(29.27072525024414, 3.6850435733795166, -25.7006893157959))
             wait(1)
         end
     end)
 end
-
 
 local Window = Rayfield:CreateWindow({
     Name = "[SACRIFICING] Lots of Rarities",
@@ -62,7 +66,7 @@ local Window = Rayfield:CreateWindow({
  
  local Tab = Window:CreateTab("Farming", 4483362458)
  
- local Section = Tab:CreateSection("AutoFarm i guess")
+ local Section = Tab:CreateSection("AutoFarm")
  local Toggle = Tab:CreateToggle({
     Name = "AutoFarm i guess",
     CurrentValue = false,
