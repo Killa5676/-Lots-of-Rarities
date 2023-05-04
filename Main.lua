@@ -39,7 +39,7 @@ end
 
 local function autoTeleportRebirthUpgrades()
     spawn(function()
-        while getgenv().autoTeleportRebirth == true do
+        while getgenv().autoteleportrebirthupgrades == true do
                 teleporto(CFrame.new(53.272117614746094, 4.080388069152832, 8.54381275177002))   --roll
                 wait(5)-- change roll time if u want lol
 
@@ -232,7 +232,6 @@ local Button = Tab:CreateButton({
         teleportPrestige()
     end
 })
-
 
 
 
