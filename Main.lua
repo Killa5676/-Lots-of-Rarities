@@ -2,6 +2,14 @@ getgenv().autoteleport = false
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+function getcurrentPlayerPOS()
+    local plyr = game.Players.LocalPlayer
+    if plyr.Character then
+        return plyr.Character.HumanoidRootPart.Position
+    end
+    return false
+end
+
 function teleporto(placeCframe)
     local plyr = game.Players.LocalPlayer
     if plyr.Character then
@@ -13,8 +21,8 @@ local function autoTeleport()
     spawn(function()
         while getgenv().autoteleport == true do
             for i = 1, 15 do 
-                teleporto(workspace.Buttons.Roll.Rarities.CFrame)
-                wait(5) -- wait for the player to finish teleporting before moving on
+                teleporto(CFrame.new(53.272117614746094, 4.080388069152832, 8.54381275177002))
+                wait(5)
 
                 teleporto(CFrame.new(53.5582275390625, 3.6850311756134033, 34.35844802856445))
                 wait(1)
@@ -37,6 +45,21 @@ local function autoTeleport()
         end
     end)
 end
+
+local function toggleAutoTeleport(bool)
+    getgenv().autoteleport = bool
+    print("Auto tap is", bool)
+    if bool then 
+        autoTeleport() 
+    end
+end
+
+local function teleportRarity()
+    spawn(function()
+        teleporto(CFrame.new(49.56317138671875, 4.080388069152832, 8.04309368133545))
+        end)
+    end
+
 
 local Window = Rayfield:CreateWindow({
     Name = "[SACRIFICING] Lots of Rarities",
@@ -68,16 +91,21 @@ local Window = Rayfield:CreateWindow({
  
  local Section = Tab:CreateSection("AutoFarm")
  local Toggle = Tab:CreateToggle({
-    Name = "AutoFarm i guess",
-    CurrentValue = false,
-    Flag = "AutoFarm i guess",
-    Callback = function(bool)
-        getgenv().autoteleport = bool
-        print("Auto tap is", bool)
-        if bool then 
-            autoTeleport() 
-        else
-            getgenv().autoteleport = false
-        end
-    end
+     Name = "AutoFarm",
+     CurrentValue = false,
+     Flag = "AutoFarm",
+     Callback = function(bool)
+         toggleAutoTeleport(bool)
+     end
  })
+
+
+local Section = Tab:CreateSection("Teleport Buttons")
+local Button = Tab:CreateButton({
+    Name = "Teleport Rarity roll",
+    Callback = function()
+        teleportRarity()
+    end
+})
+
+
