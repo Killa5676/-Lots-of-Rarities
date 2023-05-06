@@ -4,11 +4,51 @@ getgenv().autoteleportrebirthupgrades = false
 --Prestige auto
 getgenv().autoteleportprestige = false
 getgenv().autoteleportprestigeupgrades = false
+--ascension auto
+getgenv().autoteleportascension = false
+getgenv().autoteleportascensionupgrades = false
 
 
 
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local teleport_table = {
+    roll = Vector3.new(53.272117614746094, 4.080388069152832, 8.54381275177002),
+    rebirth = Vector3.new(53.5582275390625, 3.6850311756134033, 34.35844802856445),
+    upgrade1 = Vector3.new(54.4811897277832, 3.6850311756134033, 45.0595550537594),
+    upgrade2 = Vector3.new(53.402488708496094, 3.6850311756134033, 53.95044708251953),
+    upgrade3 = Vector3.new(53.5006904605508, 3.6850311756134033, 65.4072189335547),
+    upgrade4 = Vector3.new(53.66569900512695, 3.6850311756134033, 74.1558456458984),
+    prestige = Vector3.new(28.91379165649414, 3.6850435733795166, -25.550302505493164),
+    prestige_upgrade1 = Vector3.new(19.12222671508789, 3.6850435733795166, -24.704416275024414),
+    prestige_upgrade2 = Vector3.new(9.0585472569336, 3.6850435733795166, -23.850398063659668),
+    prestige_upgrade3 = Vector3.new(-1.6244397163391113, 3.6850435733795166, -23.568157196044922),
+    prestige_upgrade4 = Vector3.new(-12.07236099243164, 3.6850435733795166, -24.785995483398438),
+    prestige_upgrade5 = Vector3.new(-22.42530059814453, 3.6850435733795166, -26.54501155385742),
+    prestige_upgrade6 = Vector3.new(-32.78213119506836, 3.6850435733795166, -29.060957153353),
+    ascension = Vector3.new(-82.2553759765625, 2.379570484161377, -23.78355032348633),
+    ascension_upgrade1 = Vector3.new(-82.04621124267578, 2.3805317878723145, -14.021196365356445),
+    ascension_upgrade2 = Vector3.new(-82.65816497802734, 2.3805317878723145, -3.748478412628174),
+    ascension_upgrade3 = Vector3.new(-83.20120239257812, 2.3805317878723145, 5.332100868225098),
+    ascension_upgrade4 = Vector3.new(-82.90728759765625, 2.3805317878723145, 15.923547744750977),
+    ascension_upgrade5 = Vector3.new(-82.44547271728516, 2.3805317878723145, 25.712718963623047)
+}
+
+local tween_s = game:GetService('TweenService')
+local tween_info = TweenInfo.new(1, Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_teleport(v)
+    if lp.Character and lp.Character:FindFirstChild('HumanoidRootPart') then
+        local cf = CFrame.new(v)
+        local a = tween_s:Create(lp.Character.HumanoidRootPart, tween_info, {CFrame = cf})
+        a:Play()
+        -- a.Completed:Wait()
+        -- print('Teleporting Done!')
+    end
+end
 
 function getcurrentPlayerPOS()
     local plyr = game.Players.LocalPlayer
@@ -28,11 +68,14 @@ end
 local function autoTeleportRebirth()
     spawn(function()
         while getgenv().autoteleportrebirth == true do 
-                teleporto(CFrame.new(53.272117614746094, 4.080388069152832, 8.54381275177002)) --roll
-                wait(5)
+            bypass_teleport(teleport_table.roll)    
+            wait(10)
 
-                teleporto(CFrame.new(53.5582275390625, 3.6850311756134033, 34.35844802856445)) --rebirth
-                wait(1)
+            bypass_teleport(teleport_table.rebirth) 
+            wait(1)
+
+            bypass_teleport(teleport_table.roll)     
+            wait(1)
         end
     end)
 end
@@ -40,23 +83,26 @@ end
 local function autoTeleportRebirthUpgrades()
     spawn(function()
         while getgenv().autoteleportrebirthupgrades == true do
-                teleporto(CFrame.new(53.272117614746094, 4.080388069152832, 8.54381275177002))   --roll
-                wait(5)-- change roll time if u want lol
+            bypass_teleport(teleport_table.roll)     
+            wait(10)
 
-                teleporto(CFrame.new(53.5582275390625, 3.6850311756134033, 34.35844802856445))   -- rebirth
-                wait(1)
+            bypass_teleport(teleport_table.rebirth)  
+            wait(1)
 
-                teleporto(CFrame.new(54.4811897277832, 3.6850311756134033, 45.05955505371094))   --upgrade1
-                wait(1)
+            bypass_teleport(teleport_table.upgrade1) 
+            wait(1)
 
-                teleporto(CFrame.new(53.402488708496094, 3.6850311756134033, 53.95044708251953)) --upgrade2
-                wait(1)
+            bypass_teleport(teleport_table.upgrade2) 
+            wait(1)
 
-                teleporto(CFrame.new(53.50069046020508, 3.6850311756134033, 65.40721893310547))  --upgrade3
-                wait(1)
+            bypass_teleport(teleport_table.upgrade3) 
+            wait(1)
 
-                teleporto(CFrame.new(53.66569900512695, 3.6850311756134033, 74.15584564208984))  --upgrade4
-                wait(1)
+            bypass_teleport(teleport_table.upgrade4) 
+            wait(1)
+
+            bypass_teleport(teleport_table.roll)     
+            wait(1)
         end
     end)
 end
@@ -64,14 +110,29 @@ end
 local function autoTeleportPrestige()
     spawn(function()
         while getgenv().autoteleportprestige == true do 
-                teleporto(CFrame.new(53.272117614746094, 4.080388069152832, 8.54381275177002)) -- rol;
-                wait(10) -- change roll time if u want lol
+            bypass_teleport(teleport_table.roll)      
+            wait(10)
 
-                teleporto(CFrame.new(53.5582275390625, 3.6850311756134033, 34.35844802856445)) -- rebirth
-                wait(1)
+            bypass_teleport(teleport_table.rebirth)   
+            wait(1)
 
-                teleporto(CFrame.new(28.91379165649414, 3.6850435733795166, -25.550302505493164)) -- prestige
-                wait(1)
+            bypass_teleport(teleport_table.upgrade1) 
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade2) 
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade3) 
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade4) 
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige)  
+            wait(1)
+
+            bypass_teleport(teleport_table.roll)     
+            wait(1)
         end
     end)
 end
@@ -79,29 +140,164 @@ end
 local function autoTeleportPrestigeUpgrades()
     spawn(function()
         while getgenv().autoteleportprestigeupgrades == true do 
-                teleporto(CFrame.new(53.272117614746094, 4.080388069152832, 8.54381275177002))      --roll
-                wait(10) -- change roll time if u want lol
+            bypass_teleport(teleport_table.roll)     
+            wait(10)
 
-                teleporto(CFrame.new(53.5582275390625, 3.6850311756134033, 34.35844802856445))      -- rebirth
-                wait(1)
+            bypass_teleport(teleport_table.rebirth)  
+            wait(1)
 
-                teleporto(CFrame.new(28.91379165649414, 3.6850435733795166, -25.550302505493164))   -- prestige
-                wait(1)
+            bypass_teleport(teleport_table.upgrade1) 
+            wait(1)
 
-                teleporto(CFrame.new(19.12222671508789, 3.6850435733795166, -24.704416275024414))   -- upgrade 1
-                wait(1)
+            bypass_teleport(teleport_table.upgrade2) 
+            wait(1)
 
-                teleporto(CFrame.new(9.010854721069336, 3.6850435733795166, -25.987096786499023))   -- upgrade 2
-                wait(1)
+            bypass_teleport(teleport_table.upgrade3) 
+            wait(1)
 
-                teleporto(CFrame.new(-1.3199734687805176, 3.6850435733795166, -25.760038375854492)) -- upgrade 3
-                wait(1)
+            bypass_teleport(teleport_table.upgrade4) 
+            wait(1)
 
-                teleporto(CFrame.new(-11.400854110717773, 3.6850435733795166, -25.53847312927246))  -- upgrade 4
-                wait(1)
+            bypass_teleport(teleport_table.prestige)  
+            wait(1)
+        
+            bypass_teleport(teleport_table.prestige_upgrade1)  
+            wait(1)
 
-                teleporto(CFrame.new(-20.72136688232422, 3.6850435733795166, -25.925817489624023))  -- upgrade 5
-                wait(1)
+            bypass_teleport(teleport_table.prestige_upgrade2)
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade3)  
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade4)  
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade5)  
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade6)  
+            wait(1)
+
+            bypass_teleport(teleport_table.roll)     
+            wait(1)
+        end
+    end)
+end
+
+local function autoTeleportAscension()
+    spawn(function()
+        while getgenv().autoteleportascension == true do 
+            bypass_teleport(teleport_table.roll)     
+            wait(10)
+
+            bypass_teleport(teleport_table.rebirth)  
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade1) 
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade2) 
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade3) 
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade4) 
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige)  
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade1)  
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade2)  
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade3)  
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade4)  
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade5)  
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade6)  
+            wait(1)
+        
+            bypass_teleport(teleport_table.ascension)  
+            wait(1)
+
+            bypass_teleport(teleport_table.roll)     
+            wait(1) 
+        end
+    end)
+end
+
+local function autoTeleportAscensionUpgrades()
+    spawn(function()
+        while getgenv().autoteleportascensionupgrades == true do 
+            bypass_teleport(teleport_table.roll)     
+            wait(10)
+
+            bypass_teleport(teleport_table.rebirth)  
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade1) 
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade2)            
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade3)            
+            wait(1)
+
+            bypass_teleport(teleport_table.upgrade4)            
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige)            
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade1)   
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade2)   
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade3)   
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade4)   
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade5)   
+            wait(1)
+
+            bypass_teleport(teleport_table.prestige_upgrade6)   
+            wait(1)
+        
+            bypass_teleport(teleport_table.ascension)           
+            wait(1)
+
+            bypass_teleport(teleport_table.ascension_upgrade1)  
+            wait(1)
+
+            bypass_teleport(teleport_table.ascension_upgrade2)  
+            wait(1)
+
+            bypass_teleport(teleport_table.ascension_upgrade3)  
+            wait(1)
+
+            bypass_teleport(teleport_table.ascension_upgrade4)  
+            wait(1)
+
+            bypass_teleport(teleport_table.ascension_upgrade5)  
+            wait(1)
+
+            bypass_teleport(teleport_table.roll)                
+            wait(1)
         end
     end)
 end
@@ -122,6 +318,12 @@ end
 local function teleportPrestige()
     spawn(function()
         teleporto(CFrame.new(28.91379165649414, 3.6850435733795166, -25.550302505493164))
+        wait(1)
+    end)
+end
+local function teleportAscension()
+    spawn(function()
+        teleporto(CFrame.new(-81.06825256347656, 2.379570484161377, -23.473291397094727))
         wait(1)
     end)
 end
@@ -197,14 +399,39 @@ local Toggle = Tab:CreateToggle({
     end
 })
 local Toggle = Tab:CreateToggle({
-    Name = "AutoFarmPrestige + Upgrades",
+    Name = "AutoFarmPrestige + PresitigeUpgrades",
     CurrentValue = false,
-    Flag = "AutoFarmPrestige + Upgrades",
+    Flag = "AutoFarmPrestige + PresitigeUpgrades",
     Callback = function(bool)
         getgenv().autoteleportprestigeupgrades = bool 
         print("AutoFarmPrestige + Upgrades", bool)
         if bool then 
             autoTeleportPrestigeUpgrades()
+        end
+    end
+})
+local Section = Tab:CreateSection("AutoFarmAscension")
+local Toggle = Tab:CreateToggle({
+    Name = "AutoFarmAscension",
+    CurrentValue = false,
+    Flag = "AutoFarmAscension",
+    Callback = function(bool)
+        getgenv().autoteleportascension = bool 
+        print("AutoFarmAscension", bool)
+        if bool then 
+            autoTeleportAscension()
+        end
+    end
+})
+local Toggle = Tab:CreateToggle({
+    Name = "AutoFarmAscension + Upgrades",
+    CurrentValue = false,
+    Flag = "AutoFarmAscension + Upgrades",
+    Callback = function(bool)
+        getgenv().autoteleportascensionupgrades = bool 
+        print("AutoFarmAscension + Upgrades", bool)
+        if bool then 
+            autoTeleportAscensionUpgrades()
         end
     end
 })
@@ -232,6 +459,13 @@ local Button = Tab:CreateButton({
         teleportPrestige()
     end
 })
+local Button = Tab:CreateButton({
+    Name = "Teleport Acension",
+    Callback = function()
+        teleportAscension()
+    end
+})
+
 
 
 
