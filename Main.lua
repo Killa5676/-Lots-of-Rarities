@@ -67,9 +67,9 @@ end
 
 local function autoTeleportRebirth()
     spawn(function()
-        while getgenv().autoteleportrebirth == true do 
+        while getgenv().autoteleportrebirth == true do
             bypass_teleport(teleport_table.roll)    
-            wait(10)
+            wait(60)
 
             bypass_teleport(teleport_table.rebirth) 
             wait(1)
@@ -84,7 +84,7 @@ local function autoTeleportRebirthUpgrades()
     spawn(function()
         while getgenv().autoteleportrebirthupgrades == true do
             bypass_teleport(teleport_table.roll)     
-            wait(10)
+            wait(60)
 
             bypass_teleport(teleport_table.rebirth)  
             wait(1)
@@ -111,7 +111,7 @@ local function autoTeleportPrestige()
     spawn(function()
         while getgenv().autoteleportprestige == true do 
             bypass_teleport(teleport_table.roll)      
-            wait(10)
+            wait(60)
 
             bypass_teleport(teleport_table.rebirth)   
             wait(1)
@@ -141,7 +141,7 @@ local function autoTeleportPrestigeUpgrades()
     spawn(function()
         while getgenv().autoteleportprestigeupgrades == true do 
             bypass_teleport(teleport_table.roll)     
-            wait(10)
+            wait(60)
 
             bypass_teleport(teleport_table.rebirth)  
             wait(1)
@@ -189,7 +189,7 @@ local function autoTeleportAscension()
     spawn(function()
         while getgenv().autoteleportascension == true do 
             bypass_teleport(teleport_table.roll)     
-            wait(10)
+            wait(60)
 
             bypass_teleport(teleport_table.rebirth)  
             wait(1)
@@ -240,7 +240,7 @@ local function autoTeleportAscensionUpgrades()
     spawn(function()
         while getgenv().autoteleportascensionupgrades == true do 
             bypass_teleport(teleport_table.roll)     
-            wait(10)
+            wait(60)
 
             bypass_teleport(teleport_table.rebirth)  
             wait(1)
